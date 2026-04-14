@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Seguridad de Redes - Equipo 3</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #eef2f3; display: flex; justify-content: center; padding: 50px; }
+        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; }
+        h2 { color: #333; text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+        .mensaje { padding: 10px; border-radius: 5px; margin-bottom: 20px; text-align: center; }
+        .error { background: #ffdce0; color: #af001a; border: 1px solid #ff8f9e; }
+        .success { background: #dcffd6; color: #1a7f00; border: 1px solid #8fff8f; }
+        .hash-section { background: #222; color: #0f0; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 0.85em; word-break: break-all; margin-top: 20px; }
+        button { width: 100%; padding: 12px; background: #007bff; border: none; color: white; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        button:hover { background: #0056b3; }
+        form p { margin-bottom: 15px; }
+        input { width: 95%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registro Seguro</h2>
+        
+        {% if mensaje %}
+            <div class="mensaje {% if '✅' in mensaje %}success{% else %}error{% endif %}">
+                {{ mensaje }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Validar y Cifrar</button>
+        </form>
+
+        {% if hash_ejemplo %}
+            <div class="hash-section">
+                <strong>🔒 Password Hashed (PBKDF2):</strong><br><br>
+                {{ hash_ejemplo }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
