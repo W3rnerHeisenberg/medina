@@ -2,24 +2,233 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seguridad de Redes - Equipo 3</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #eef2f3; display: flex; justify-content: center; padding: 50px; }
-        .container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; }
-        h2 { color: #333; text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
-        .mensaje { padding: 10px; border-radius: 5px; margin-bottom: 20px; text-align: center; }
-        .error { background: #ffdce0; color: #af001a; border: 1px solid #ff8f9e; }
-        .success { background: #dcffd6; color: #1a7f00; border: 1px solid #8fff8f; }
-        .hash-section { background: #222; color: #0f0; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 0.85em; word-break: break-all; margin-top: 20px; }
-        button { width: 100%; padding: 12px; background: #007bff; border: none; color: white; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 10px; }
-        button:hover { background: #0056b3; }
-        form p { margin-bottom: 15px; }
-        input { width: 95%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container { 
+            background: white; 
+            padding: 40px;
+            border-radius: 15px; 
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%; 
+            max-width: 500px;
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 { 
+            color: #333; 
+            text-align: center; 
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .mensaje { 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-bottom: 25px; 
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+            font-weight: 600;
+            border-left: 4px solid;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .error { 
+            background: #ffdce0; 
+            color: #af001a; 
+            border-left-color: #af001a;
+        }
+        
+        .success { 
+            background: #dcffd6; 
+            color: #1a7f00; 
+            border-left-color: #1a7f00;
+        }
+        
+        form { display: grid; gap: 18px; }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #333;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .icon {
+            position: absolute;
+            left: 12px;
+            font-size: 18px;
+            color: #667eea;
+            pointer-events: none;
+        }
+        
+        input, textarea, select { 
+            width: 100%; 
+            padding: 12px 12px 12px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+        
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        input:valid {
+            border-color: #4caf50;
+            background-color: #f1f8f4;
+        }
+        
+        input:invalid:not(:placeholder-shown) {
+            border-color: #f44336;
+            background-color: #fef5f5;
+        }
+        
+        .hash-section { 
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #00ff88;
+            padding: 15px; 
+            border-radius: 8px; 
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.8em; 
+            word-break: break-all;
+            margin-top: 25px;
+            border-left: 4px solid #00ff88;
+            animation: slideUp 0.6s ease-out;
+            overflow-x: auto;
+        }
+        
+        .hash-section strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+        
+        button { 
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none; 
+            color: white; 
+            border-radius: 8px;
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .errorlist {
+            list-style: none;
+            margin-top: 5px;
+            padding: 8px 10px;
+            background-color: #fef5f5;
+            border-left: 3px solid #f44336;
+            border-radius: 4px;
+            color: #c62828;
+            font-size: 13px;
+        }
+        
+        .errorlist li {
+            margin: 4px 0;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+                border-radius: 12px;
+            }
+            
+            h2 {
+                font-size: 22px;
+                padding-bottom: 12px;
+            }
+            
+            input, textarea, select {
+                padding: 11px 11px 11px 40px;
+                font-size: 16px;
+            }
+            
+            button {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            body {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Registro Seguro</h2>
+        <h2>🔐 Registro Seguro</h2>
         
         {% if mensaje %}
             <div class="mensaje {% if '✅' in mensaje %}success{% else %}error{% endif %}">
@@ -29,13 +238,38 @@
 
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Validar y Cifrar</button>
+            
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <div class="input-wrapper">
+                        {% if field.name == 'nombre' %}
+                            <span class="icon">👤</span>
+                        {% elif field.name == 'correo' %}
+                            <span class="icon">📧</span>
+                        {% elif field.name == 'celular' %}
+                            <span class="icon">📱</span>
+                        {% elif field.name == 'password' %}
+                            <span class="icon">🔑</span>
+                        {% endif %}
+                        {{ field }}
+                    </div>
+                    {% if field.errors %}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <button type="submit">✓ Validar y Cifrar</button>
         </form>
 
         {% if hash_ejemplo %}
             <div class="hash-section">
-                <strong>🔒 Password Hashed (PBKDF2):</strong><br><br>
+                <strong>🔒 Password Hashed (PBKDF2):</strong>
                 {{ hash_ejemplo }}
             </div>
         {% endif %}
