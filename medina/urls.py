@@ -21,4 +21,5 @@ from crypto import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('registro/', views.registro, name='registro'),
+    path('registro/exitoso/', views.registro_exitoso, name='registro_exitoso'),
 ]

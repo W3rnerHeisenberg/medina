@@ -231,12 +231,23 @@
         <h2>🔐 Registro Seguro</h2>
         
         {% if mensaje %}
-            <div class="mensaje {% if '✅' in mensaje %}success{% else %}error{% endif %}">
+            <div class="mensaje {% if 'Error' in mensaje %}error{% else %}success{% endif %}">
                 {{ mensaje }}
             </div>
         {% endif %}
-
-        <form method="POST">
+        
+        <div class="form-group" style="background: #f5f5f5; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+            <strong style="color: #667eea; font-size: 13px;">📋 Requisitos de Contraseña:</strong>
+            <ul style="list-style: none; padding-left: 15px; margin-top: 8px; font-size: 12px; color: #666;">
+                <li>✓ Mínimo 10 caracteres</li>
+                <li>✓ Una letra MAYÚSCULA</li>
+                <li>✓ Una letra minúscula</li>
+                <li>✓ Un número (0-9)</li>
+                <li>✓ Un carácter especial (@, #, !, $, *, etc.)</li>
+            </ul>
+        </div>
+        
+        <form method="POST" novalidate>
             {% csrf_token %}
             
             {% for field in form %}
