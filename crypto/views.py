@@ -24,15 +24,13 @@ def registro(request):
                 # Guardar en sesión los datos para mostrar en la página de éxito
                 request.session['usuario_id'] = usuario.id
                 request.session['password_hash'] = password_hasheada
+                request.session.modified = True
                 
                 # Redireccionar a la página de éxito
                 return redirect('registro_exitoso')
                 
             except Exception as e:
-                messages.error(request, f"❌ Error al registrar: {str(e)}")
-        else:
-            # Los errores del formulario se mostrarán automáticamente
-            pass
+                form.add_error(None, f"Error al registrar: {str(e)}")
     else:
         form = RegistroUsuarioForm()
     

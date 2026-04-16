@@ -3,429 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Seguro de Usuarios - Portal Galáctico</title>
+    <title>Registro Seguro</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Space Mono', monospace;
-            background: #000000;
+            font-family: 'Inter', sans-serif;
+            background: #020205;
+            color: #e2e8f0;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 20px;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 560px;
+            background: rgba(8, 10, 20, 0.98);
+            border: 1px solid rgba(148, 163, 184, 0.14);
+            box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
+            border-radius: 24px;
+            padding: 36px;
+            position: relative;
             overflow: hidden;
-            position: relative;
         }
 
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .star {
+        .page:before {
+            content: '';
             position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.8;
-            animation: twinkle 3s infinite;
+            inset: 0;
+            border-radius: 24px;
+            pointer-events: none;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.16), transparent 25%, transparent 75%, rgba(236, 72, 153, 0.14));
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        .container {
+        .header {
             position: relative;
-            z-index: 2;
-            background: rgba(10, 10, 20, 0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid #ff00ff;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 40px rgba(255, 0, 255, 0.05), 0 0 100px rgba(255, 0, 0, 0.2);
-            width: 100%;
-            max-width: 550px;
-            animation: floatIn 0.8s ease-out, neonBorder 4s ease-in-out infinite;
-        }
-
-        @keyframes neonBorder {
-            0% { border-color: #ff00ff; box-shadow: 0 0 30px rgba(255, 0, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 40px rgba(255, 0, 255, 0.05); }
-            25% { border-color: #00ffff; box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), 0 0 60px rgba(255, 0, 255, 0.4), inset 0 0 40px rgba(0, 255, 255, 0.05); }
-            50% { border-color: #00ff00; box-shadow: 0 0 30px rgba(0, 255, 0, 0.6), 0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 40px rgba(0, 255, 0, 0.05); }
-            75% { border-color: #ffff00; box-shadow: 0 0 30px rgba(255, 255, 0, 0.6), 0 0 60px rgba(255, 0, 255, 0.4), inset 0 0 40px rgba(255, 255, 0, 0.05); }
-            100% { border-color: #ff00ff; box-shadow: 0 0 30px rgba(255, 0, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 40px rgba(255, 0, 255, 0.05); }
-        }
-
-        @keyframes floatIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            z-index: 1;
+            margin-bottom: 24px;
         }
 
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 36px;
-            background: linear-gradient(90deg, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000, #ff00ff);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-align: center;
-            border-bottom: 2px solid #ff00ff;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            animation: neonGlow 3s ease-in-out infinite, gradientShift 6s ease infinite;
-            text-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
-            filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.6)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
-        }
-
-        @keyframes neonGlow {
-            0%, 100% { text-shadow: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3); }
-            50% { text-shadow: 0 0 30px rgba(255, 0, 255, 0.8), 0 0 40px rgba(0, 255, 255, 0.6), 0 0 50px rgba(0, 255, 0, 0.4); }
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .reglas {
-            background: rgba(20, 0, 40, 0.5);
-            border-left: 4px solid #ff00ff;
-            padding: 15px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #00ffff;
-            box-shadow: inset 0 0 15px rgba(255, 0, 255, 0.1);
-        }
-        
-        .reglas h3 {
-            color: #00ff00;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #f8fafc;
             margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .info-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 18px;
+            padding: 18px 20px;
+            margin-bottom: 26px;
+        }
+
+        .info-panel strong {
+            color: #f8fafc;
+            display: block;
+            margin-bottom: 8px;
             font-size: 13px;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+            letter-spacing: 0.08em;
         }
-        
-        .reglas ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .reglas li {
-            margin: 5px 0;
-            padding-left: 20px;
-            position: relative;
-            color: #00ffff;
-        }
-        
-        .reglas li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #ff00ff;
-            text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
-        }
-        
-        .messages {
-            margin-bottom: 20px;
-        }
-        
-        .alert {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
+
+        .info-panel p {
+            color: #cbd5e1;
             font-size: 13px;
-            animation: slideDown 0.3s ease;
-            border-left: 4px solid;
+            line-height: 1.8;
         }
-        
-        @keyframes slideDown {
-            from { transform: translateY(-10px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        .alert-success {
-            background: rgba(0, 255, 0, 0.1);
-            color: #00ff00;
-            border-left-color: #00ff00;
-            text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
-        }
-        
-        .alert-error {
-            background: rgba(255, 0, 0, 0.1);
-            color: #ff0080;
-            border-left-color: #ff0080;
-            text-shadow: 0 0 8px rgba(255, 0, 128, 0.5);
-        }
-        
-        .errorlist {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0;
-        }
-        
-        .errorlist li {
-            background: rgba(255, 0, 0, 0.1);
-            color: #ff0080;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 5px;
-            border-left: 3px solid #ff0080;
-            font-size: 12px;
-            text-shadow: 0 0 6px rgba(255, 0, 128, 0.5);
-        }
-        
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
         }
-        
+
         label {
             display: block;
             margin-bottom: 8px;
-            color: #00ffff;
-            font-weight: 600;
+            color: #94a3b8;
             font-size: 12px;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            letter-spacing: 0.08em;
         }
-        
+
         input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ff00ff;
-            border-radius: 8px;
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            background: rgba(15, 23, 42, 0.95);
+            color: #e2e8f0;
+            padding: 14px 16px;
             font-size: 14px;
-            background: rgba(20, 0, 40, 0.6);
-            color: #00ff00;
-            transition: all 0.3s;
-            font-family: inherit;
-            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        input::placeholder {
-            color: #666688;
-        }
-        
         input:focus {
             outline: none;
-            border-color: #00ff00;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.6), 0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 0, 0.1);
-            background: rgba(0, 40, 20, 0.4);
-            color: #00ffff;
+            border-color: rgba(59, 130, 246, 0.9);
+            box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.12);
+            background: rgba(15, 23, 42, 1);
         }
-        
-        input.error {
-            border-color: #f43f5e;
+
+        .errorlist {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0 0;
         }
-        
-        ul.errorlist + input {
-            border-color: #f43f5e;
+
+        .errorlist li {
+            background: rgba(248, 113, 113, 0.12);
+            color: #fca5a5;
+            padding: 10px 12px;
+            border-left: 4px solid rgba(248, 113, 113, 0.9);
+            border-radius: 10px;
+            font-size: 13px;
         }
-        
+
         button {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(90deg, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000, #ff00ff);
-            background-size: 300% 300%;
-            border: 2px solid #ff00ff;
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
+            border: none;
+            border-radius: 16px;
+            padding: 16px;
             font-size: 15px;
             font-weight: 700;
-            margin-top: 10px;
-            transition: all 0.3s;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
-            animation: buttonGlow 2s ease-in-out infinite, gradientShift 6s ease infinite;
+            color: #f8fafc;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 1), rgba(124, 58, 237, 1), rgba(16, 185, 129, 1));
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            box-shadow: 0 18px 42px rgba(59, 130, 246, 0.22);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            z-index: 1;
         }
 
-        @keyframes buttonGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(255, 0, 255, 0.8), 0 0 80px rgba(0, 255, 255, 0.6), 0 0 120px rgba(0, 255, 0, 0.4); }
-        }
-        
         button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 50px rgba(255, 0, 255, 0.9), 0 0 100px rgba(0, 255, 255, 0.7), 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-color: #00ff00;
+            transform: translateY(-2px);
+            box-shadow: 0 24px 52px rgba(59, 130, 246, 0.3);
         }
-        
-        button:active {
-            transform: translateY(-1px);
-        }
-        
-        .form-footer {
+
+        .footer {
+            margin-top: 22px;
+            font-size: 12px;
+            color: #94a3b8;
             text-align: center;
-            margin-top: 20px;
-            font-size: 11px;
-            color: #ff00ff;
-            font-family: 'Orbitron', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
-        }
-        
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            opacity: 0.1;
-            pointer-events: none;
-            z-index: 0;
+            position: relative;
+            z-index: 1;
         }
 
-        .orb1 {
-            width: 300px;
-            height: 300px;
-            background: #a855f7;
-            top: -100px;
-            left: -100px;
-            animation: float 20s infinite;
+        .footer a {
+            color: #60a5fa;
+            text-decoration: none;
         }
 
-        .orb2 {
-            width: 200px;
-            height: 200px;
-            background: #6366f1;
-            bottom: -50px;
-            right: -50px;
-            animation: float 25s infinite reverse;
+        .footer a:hover {
+            text-decoration: underline;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            33% { transform: translate(50px, -50px); }
-            66% { transform: translate(-50px, 50px); }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            .orb1, .orb2 {
-                display: none;
-            }
+        @media (max-width: 600px) {
+            .page { padding: 28px; }
+            h1 { font-size: 28px; }
         }
     </style>
 </head>
 <body>
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="stars" id="stars"></div>
-
-    <div class="container">
-        <h1>🔐 Portal de Registro</h1>
-        
-        <div class="reglas">
-            <h3>📋 Requisitos de Contraseña:</h3>
-            <ul>
-                <li>Mínimo 10 caracteres</li>
-                <li>Al menos una letra MAYÚSCULA</li>
-                <li>Al menos una letra minúscula</li>
-                <li>Al menos un número (0-9)</li>
-                <li>Al menos un carácter especial (@, #, !, $, *, etc.)</li>
-            </ul>
+    <div class="page">
+        <div class="header">
+            <h1>Registro de Usuario</h1>
+            <p class="subtitle">Complete la inscripción con datos reales. Su contraseña se validará y protegerá con un hash seguro.</p>
         </div>
-        
-        <form method="POST" novalidate>
+
+        <div class="info-panel">
+            <strong>Requisitos de seguridad</strong>
+            <p>Mínimo 10 caracteres, al menos una mayúscula, una minúscula, un número y un carácter especial.</p>
+        </div>
+
+        <form method="POST" novalidate action="{% url 'registro' %}">
             {% csrf_token %}
-            
+
             {% if form.non_field_errors %}
-                <div class="alert alert-error">
-                    {{ form.non_field_errors }}
+                <div class="errorlist" style="margin-bottom: 20px;">
+                    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
                 </div>
             {% endif %}
-            
+
             <div class="form-group">
                 <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }}</label>
                 {{ form.nombre }}
                 {% if form.nombre.errors %}
-                    {{ form.nombre.errors }}
+                    <div class="errorlist">{% for error in form.nombre.errors %}<li>{{ error }}</li>{% endfor %}</div>
                 {% endif %}
             </div>
-            
+
             <div class="form-group">
                 <label for="{{ form.correo.id_for_label }}">{{ form.correo.label }}</label>
                 {{ form.correo }}
                 {% if form.correo.errors %}
-                    {{ form.correo.errors }}
+                    <div class="errorlist">{% for error in form.correo.errors %}<li>{{ error }}</li>{% endfor %}</div>
                 {% endif %}
             </div>
-            
+
             <div class="form-group">
                 <label for="{{ form.celular.id_for_label }}">{{ form.celular.label }}</label>
                 {{ form.celular }}
                 {% if form.celular.errors %}
-                    {{ form.celular.errors }}
+                    <div class="errorlist">{% for error in form.celular.errors %}<li>{{ error }}</li>{% endfor %}</div>
                 {% endif %}
             </div>
-            
+
             <div class="form-group">
                 <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
                 {{ form.password }}
                 {% if form.password.errors %}
-                    {{ form.password.errors }}
+                    <div class="errorlist">{% for error in form.password.errors %}<li>{{ error }}</li>{% endfor %}</div>
                 {% endif %}
             </div>
-            
+
             <div class="form-group">
                 <label for="{{ form.confirm_password.id_for_label }}">{{ form.confirm_password.label }}</label>
                 {{ form.confirm_password }}
                 {% if form.confirm_password.errors %}
-                    {{ form.confirm_password.errors }}
+                    <div class="errorlist">{% for error in form.confirm_password.errors %}<li>{{ error }}</li>{% endfor %}</div>
                 {% endif %}
             </div>
-            
-            <button type="submit">🚀 Registrarse</button>
-        </form>
-        
-        <div class="form-footer">
-            🌌 Seguridad de Redes | Grupo 3 - 2026 🚀
-        </div>
-    </div>
 
-    <script>
-        // Generar estrellas aleatorias
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.width = Math.random() * 2 + 'px';
-            star.style.height = star.style.width;
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            starsContainer.appendChild(star);
-        }
-    </script>
+            <button type="submit">Registrar usuario</button>
+        </form>
+
+        <div class="footer">Medina - Seguridad de Redes</div>
+    </div>
 </body>
 </html>
