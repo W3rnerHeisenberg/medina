@@ -11,9 +11,7 @@
         
         body {
             font-family: 'Space Mono', monospace;
-            background: linear-gradient(135deg, #0a0e27 0%, #16213e 25%, #0f3460 50%, #16213e 75%, #0a0e27 100%);
-            background-size: 400% 400%;
-            animation: galaxyBg 15s ease infinite;
+            background: #000000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -21,12 +19,6 @@
             padding: 20px;
             overflow: hidden;
             position: relative;
-        }
-
-        @keyframes galaxyBg {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         .stars {
@@ -55,15 +47,23 @@
         .container {
             position: relative;
             z-index: 2;
-            background: rgba(15, 52, 96, 0.7);
+            background: rgba(10, 10, 20, 0.8);
             backdrop-filter: blur(10px);
-            border: 2px solid #a855f7;
+            border: 2px solid #ff00ff;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.5), 0 0 80px rgba(99, 102, 241, 0.3), inset 0 0 40px rgba(168, 85, 247, 0.1);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 40px rgba(255, 0, 255, 0.05), 0 0 100px rgba(255, 0, 0, 0.2);
             width: 100%;
             max-width: 550px;
-            animation: floatIn 0.8s ease-out;
+            animation: floatIn 0.8s ease-out, neonBorder 4s ease-in-out infinite;
+        }
+
+        @keyframes neonBorder {
+            0% { border-color: #ff00ff; box-shadow: 0 0 30px rgba(255, 0, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 40px rgba(255, 0, 255, 0.05); }
+            25% { border-color: #00ffff; box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), 0 0 60px rgba(255, 0, 255, 0.4), inset 0 0 40px rgba(0, 255, 255, 0.05); }
+            50% { border-color: #00ff00; box-shadow: 0 0 30px rgba(0, 255, 0, 0.6), 0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 40px rgba(0, 255, 0, 0.05); }
+            75% { border-color: #ffff00; box-shadow: 0 0 30px rgba(255, 255, 0, 0.6), 0 0 60px rgba(255, 0, 255, 0.4), inset 0 0 40px rgba(255, 255, 0, 0.05); }
+            100% { border-color: #ff00ff; box-shadow: 0 0 30px rgba(255, 0, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 40px rgba(255, 0, 255, 0.05); }
         }
 
         @keyframes floatIn {
@@ -80,39 +80,50 @@
         h1 {
             font-family: 'Orbitron', sans-serif;
             font-size: 36px;
-            background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #06b6d4 100%);
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000, #ff00ff);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-align: center;
-            border-bottom: 2px solid #a855f7;
+            border-bottom: 2px solid #ff00ff;
             padding-bottom: 15px;
             margin-bottom: 30px;
-            animation: glow 2s ease-in-out infinite;
+            animation: neonGlow 3s ease-in-out infinite, gradientShift 6s ease infinite;
+            text-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.6)) drop-shadow(0 0 20px rgba(0, 255, 255, 0.4));
         }
 
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 10px rgba(168, 85, 247, 0.3); }
-            50% { text-shadow: 0 0 30px rgba(168, 85, 247, 0.7); }
+        @keyframes neonGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3); }
+            50% { text-shadow: 0 0 30px rgba(255, 0, 255, 0.8), 0 0 40px rgba(0, 255, 255, 0.6), 0 0 50px rgba(0, 255, 0, 0.4); }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .reglas {
-            background: rgba(99, 102, 241, 0.1);
-            border-left: 4px solid #a855f7;
+            background: rgba(20, 0, 40, 0.5);
+            border-left: 4px solid #ff00ff;
             padding: 15px;
             margin-bottom: 25px;
             border-radius: 8px;
             font-size: 12px;
-            color: #c4b5fd;
+            color: #00ffff;
+            box-shadow: inset 0 0 15px rgba(255, 0, 255, 0.1);
         }
         
         .reglas h3 {
-            color: #06b6d4;
+            color: #00ff00;
             margin-bottom: 10px;
             font-size: 13px;
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
         }
         
         .reglas ul {
@@ -124,14 +135,15 @@
             margin: 5px 0;
             padding-left: 20px;
             position: relative;
-            color: #e0e7ff;
+            color: #00ffff;
         }
         
         .reglas li:before {
             content: "▸";
             position: absolute;
             left: 0;
-            color: #a855f7;
+            color: #ff00ff;
+            text-shadow: 0 0 8px rgba(255, 0, 255, 0.6);
         }
         
         .messages {
@@ -153,15 +165,17 @@
         }
         
         .alert-success {
-            background: rgba(6, 182, 212, 0.1);
-            color: #00ffff;
-            border-left-color: #06b6d4;
+            background: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            border-left-color: #00ff00;
+            text-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
         }
         
         .alert-error {
-            background: rgba(244, 63, 94, 0.1);
-            color: #ff6b9d;
-            border-left-color: #f43f5e;
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff0080;
+            border-left-color: #ff0080;
+            text-shadow: 0 0 8px rgba(255, 0, 128, 0.5);
         }
         
         .errorlist {
@@ -171,13 +185,14 @@
         }
         
         .errorlist li {
-            background: rgba(244, 63, 94, 0.1);
-            color: #ff6b9d;
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff0080;
             padding: 10px;
             margin: 8px 0;
             border-radius: 5px;
-            border-left: 3px solid #f43f5e;
+            border-left: 3px solid #ff0080;
             font-size: 12px;
+            text-shadow: 0 0 6px rgba(255, 0, 128, 0.5);
         }
         
         .form-group {
@@ -187,35 +202,38 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #06b6d4;
+            color: #00ffff;
             font-weight: 600;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
         
         input {
             width: 100%;
             padding: 12px;
-            border: 2px solid #6366f1;
+            border: 2px solid #ff00ff;
             border-radius: 8px;
             font-size: 14px;
-            background: rgba(99, 102, 241, 0.1);
-            color: #e0e7ff;
+            background: rgba(20, 0, 40, 0.6);
+            color: #00ff00;
             transition: all 0.3s;
             font-family: inherit;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
         }
 
         input::placeholder {
-            color: #a099ff;
+            color: #666688;
         }
         
         input:focus {
             outline: none;
-            border-color: #a855f7;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
-            background: rgba(168, 85, 247, 0.05);
+            border-color: #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.6), 0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 10px rgba(0, 255, 0, 0.1);
+            background: rgba(0, 40, 20, 0.4);
+            color: #00ffff;
         }
         
         input.error {
@@ -229,8 +247,9 @@
         button {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
-            border: 2px solid #a855f7;
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000, #ff00ff);
+            background-size: 300% 300%;
+            border: 2px solid #ff00ff;
             color: white;
             border-radius: 8px;
             cursor: pointer;
@@ -241,13 +260,19 @@
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
+            animation: buttonGlow 2s ease-in-out infinite, gradientShift 6s ease infinite;
+        }
+
+        @keyframes buttonGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 255, 0.8), 0 0 80px rgba(0, 255, 255, 0.6), 0 0 120px rgba(0, 255, 0, 0.4); }
         }
         
         button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.7), 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: #06b6d4;
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.9), 0 0 100px rgba(0, 255, 255, 0.7), 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: #00ff00;
         }
         
         button:active {
@@ -258,10 +283,11 @@
             text-align: center;
             margin-top: 20px;
             font-size: 11px;
-            color: #a099ff;
+            color: #ff00ff;
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
         }
         
         .orb {
@@ -319,33 +345,6 @@
     <div class="container">
         <h1>🔐 Portal de Registro</h1>
         
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-        
-        {% if usuario_registrado %}
-            <div class="success-info">
-                <strong>✅ Registro Exitoso</strong>
-                Usuario: {{ usuario_registrado.nombre }}<br>
-                Correo: {{ usuario_registrado.correo }}<br>
-                Celular: {{ usuario_registrado.celular }}<br>
-                Fecha: {{ usuario_registrado.fecha_registro|date:"d/m/Y H:i" }}
-            </div>
-            
-            {% if password_hash %}
-                <div class="hash-section">
-                    <strong>🔒 Contraseña Hasheada (PBKDF2):</strong>
-                    {{ password_hash }}
-                </div>
-            {% endif %}
-        {% endif %}
-        
         <div class="reglas">
             <h3>📋 Requisitos de Contraseña:</h3>
             <ul>
@@ -359,6 +358,12 @@
         
         <form method="POST" novalidate>
             {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
             
             <div class="form-group">
                 <label for="{{ form.nombre.id_for_label }}">{{ form.nombre.label }}</label>
@@ -400,18 +405,27 @@
                 {% endif %}
             </div>
             
-            {% if form.non_field_errors %}
-                <div class="alert alert-error">
-                    {{ form.non_field_errors }}
-                </div>
-            {% endif %}
-            
-            <button type="submit">📝 Registrarse</button>
+            <button type="submit">🚀 Registrarse</button>
         </form>
         
         <div class="form-footer">
-            © 2026 Seguridad de Redes - Proyecto Grupo 3
+            🌌 Seguridad de Redes | Grupo 3 - 2026 🚀
         </div>
     </div>
+
+    <script>
+        // Generar estrellas aleatorias
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 2 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    </script>
 </body>
 </html>
